@@ -1,14 +1,13 @@
 package com.toyproject.toyBulletin.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@ToString
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +21,10 @@ public class Member {
 
     @Column(nullable = false)
     private String pw;
+
+    public Member(String nickName, String memberId, String pw){
+        this.nickName = nickName;
+        this.memberId = memberId;
+        this.pw = pw;
+    }
 }
