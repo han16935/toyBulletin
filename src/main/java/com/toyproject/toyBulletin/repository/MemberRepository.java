@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "SELECT * FROM MEMBER WHERE MEMBER_ID = :memberId", nativeQuery = true)
-    String findByMemberId(@Param("memberId") String memberId);
+    Member findByMemberId(@Param("memberId") String memberId);
 
     @Query(value = "SELECT * FROM MEMBER WHERE NICK_NAME = :nickName", nativeQuery = true)
-    String findByMemberNickName(@Param("nickName") String nickName);
+    Member findByMemberNickName(@Param("nickName") String nickName);
 //    public boolean login(String memberId, String pw){
 //        if(findByMemberId(memberId).equals(pw)) return true;
 //        else return false;
