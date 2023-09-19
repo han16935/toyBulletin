@@ -20,6 +20,10 @@ public class MemberDao {
         this.pw = pw;
     }
 
+    public MemberDao(String memberId, String pw){
+        this.memberId = memberId;
+        this.pw = pw;
+    }
     public Member toMember(){
         return new Member(this.getNickName(), this.getMemberId(), this.getPw());
     }
@@ -28,3 +32,4 @@ public class MemberDao {
         return new MemberDao(m.getNickName(), m.getMemberId(), m.getPw());
     }
 }
+
