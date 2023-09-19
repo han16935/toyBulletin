@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+
+   <!--content-->
+       <form class="container" action = "/join" method = "post">
+           <div class="mb-3">
+               <label class = "form-label">별명</label>
+               <input id = "member-nickName" class="form-control" type="text" name = "nickName"/>
+           </div>
+
+           <div class="mb-3">
+               <label class="form-label">아이디 입력</label>
+               <input id = "member-id" class="form-control" type="text" name = "memberId"/>
+           </div>
+
+           <div class="mb-3">
+               <label class="form-label">비밀번호 입력</label>
+               <input id = "member-pw" class="form-control" type="text" name = "pw"/>
+           </div>
+
+           <button id="member-create-btn" type="button" class="btn btn-primary">Submit</button>
+           <a href="/" class="btn btn-primary">Return to First Page</a>
+       </form>
+
+       <script>
+           const memberCreateBtn = document.querySelector("#member-create-btn");
+           memberCreateBtn.addEventListener("click", async function () {
+               const jsMember = {
+                   nickName: document.querySelector("#member-nickName").value,
+                   memberId: document.querySelector("#member-id").value,
+                   pw: document.querySelector("#member-pw").value
+               };
+               //console.log(jsMember);
+               const url = "/join";
+
+               try {
+                   const response = await fetch(url, {
+                       method: "post",
+                       body: JSON.stringify(jsMember),
+                       headers: {
+                           "Content-type": "application/json"
+                       }
+                   });
+
+                   const message = await response.text();
+                   console.log(message);
+                   if (message == 'Welcome!') {
+                       alert('Welcome! Now You can login!'); // Display the alert message
+                   }
+                   else alert("Error... Nickname or ID may be duplicate with other number." +
+                       "Please write again");
+               } catch (error) {
+                   alert("Error... Nickname or ID may be duplicate with other number." +
+                       "Please write again");
+               }
+           });
+       </script>
+</body>
+</html>
