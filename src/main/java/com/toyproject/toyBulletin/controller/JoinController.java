@@ -8,13 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @AllArgsConstructor
@@ -39,13 +36,19 @@ public class JoinController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Boolean> login(@RequestBody MemberDao m){
+    public ResponseEntity<Member> login(@RequestBody MemberDao m){
         /*
-            1. JoinService의 login(MemberDao m) 호출
-            2.
+            1. JoinService의 login(MemberDao m) 호출 (m의 id, pw 매칭될 경우 true 반환)
+            2. service의 login() 결과에 따라 ResponseEntity, body true or false return
          */
-        boolean result = joinService.login(m);
-        if(result == true) return ResponseEntity.status(HttpStatus.OK).body(true);
-        else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+        Member result = joinService.login(m);
+        if(result != null) return ResponseEntity.status(HttpStatus.OK).body(result);
+        else return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @PostMapping("/login-success")
+    public String loginSuccess(@RequestBody MemberDao m){
+        System.out.println("/"+m.getId()+"/articles");
+        return "/"+m.getId()+"/articles";
     }
 }
