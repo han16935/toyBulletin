@@ -39,7 +39,13 @@ public class JoinController {
     }
 
     @PostMapping("/login")
-    public void login(MemberDao m){
-
+    public ResponseEntity<Boolean> login(@RequestBody MemberDao m){
+        /*
+            1. JoinService의 login(MemberDao m) 호출
+            2.
+         */
+        boolean result = joinService.login(m);
+        if(result == true) return ResponseEntity.status(HttpStatus.OK).body(true);
+        else return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
     }
 }
