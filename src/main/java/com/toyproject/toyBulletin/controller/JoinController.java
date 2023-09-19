@@ -24,7 +24,7 @@ public class JoinController {
     @PostMapping("/join")
     public ResponseEntity<String> join(@RequestBody MemberDao m, RedirectAttributes attributes) throws IllegalStateException {
         // Check if the data is appropriate (e.g., no duplicates)
-            Member result = joinService.join(m);
+        Member result = joinService.join(m);
         log.info(result.toString());
         if (result != null) {
             // If the data is appropriate and the join is successful, return a success message
