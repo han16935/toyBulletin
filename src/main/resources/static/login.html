@@ -19,7 +19,7 @@
                                <form action="/login" method="post">
                                    <div class="form-outline mb-4">
                                        <label class="form-label" for="typeEmailX-2">ID</label>
-                                       <input type="input" name = "memberId" id="typeEmailX-2" class="form-control form-control-lg member-id" />
+                                       <input type="text" name = "memberId" id="typeEmailX-2" class="form-control form-control-lg member-id" />
                                    </div>
 
                                    <div class="form-outline mb-4">
@@ -54,8 +54,24 @@
               }
           });
 
-          const message = await response.text();
-          console.log(message);
+          if(200<=response.status && response.status<300){
+              const result = await response.json();
+              alert('Login Success!');
+              const successResponse = await fetch("/login-success", {
+                  method : "post",
+                  body : JSON.stringify(result),
+                  headers : {
+                      "Content-type" : "application/json"
+                  }
+              });
+              console.log(successResponse.body);
+          }
+
+          else{
+             alert('Login Fail!');
+             const input = document.querySelector(".member-pw");
+             input.value = "";
+          }
       });
    </script>
 </body>
