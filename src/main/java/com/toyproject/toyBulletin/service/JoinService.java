@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -24,5 +26,16 @@ public class JoinService {
         Member result = memberRepository.save(willBeSaved);
         // 3. 1에서 만들어진 결과 반환
         return result;
+    }
+
+    public boolean login(MemberDao m){
+        Member willBeLogined = m.toMember();
+        Member original = memberRepository.findByMemberId(willBeLogined.getMemberId());
+        log.info(willBeLogined.toString());
+        log.info(original.toString());
+        if(original == null || !(willBeLogined.getPw().equals(original.getPw()) &&
+                                 willBeLogined.getMemberId().equals(original.getMemberId())))
+            return false;
+        else return true;
     }
 }
