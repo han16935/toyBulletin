@@ -28,14 +28,14 @@ public class JoinService {
         return result;
     }
 
-    public boolean login(MemberDao m){
+    public Member login(MemberDao m){
         Member willBeLogined = m.toMember();
         Member original = memberRepository.findByMemberId(willBeLogined.getMemberId());
         log.info(willBeLogined.toString());
         log.info(original.toString());
         if(original == null || !(willBeLogined.getPw().equals(original.getPw()) &&
                                  willBeLogined.getMemberId().equals(original.getMemberId())))
-            return false;
-        else return true;
+            return null;
+        else return original;
     }
 }
