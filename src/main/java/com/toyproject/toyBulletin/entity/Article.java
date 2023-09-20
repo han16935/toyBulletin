@@ -20,4 +20,10 @@ public class Article {
     private String title;
 
     private String content;
+
+    public Article(Member author, String title, String content){
+        this.author = author;
+        this.title = title;
+        this.content = content;
+    }
 }

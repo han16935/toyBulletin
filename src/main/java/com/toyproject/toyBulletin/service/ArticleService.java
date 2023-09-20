@@ -1,5 +1,6 @@
 package com.toyproject.toyBulletin.service;
 
+import com.toyproject.toyBulletin.dao.ArticleDto;
 import com.toyproject.toyBulletin.entity.Article;
 import com.toyproject.toyBulletin.repository.ArticleRepository;
 import com.toyproject.toyBulletin.repository.MemberRepository;
@@ -21,5 +22,15 @@ public class ArticleService {
         if(memberRepository.findById(id).isPresent())
           return memberRepository.findById(id).get().getIsValid();
         else return false;
+    }
+
+    public void save(ArticleDto articleDto) {
+        articleRepository.save(new Article(
+                memberRepository.findById(articleDto.getAuthor()).orElseThrow(
+                        ()-> new IllegalArgumentException("해당 회원은 존재하지 않습니다!")
+                ),
+                articleDto.getTitle(),
+                articleDto.getContent()
+        ));
     }
 }

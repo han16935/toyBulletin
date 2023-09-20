@@ -36,6 +36,7 @@ public class ArticleController {
     @PostMapping("/article/create")
     public String createArticle(@RequestParam Long id, ArticleDto articleDto){
         log.info(articleDto.toString());
+        articleService.save(articleDto);
         return "redirect:/articles?id=" + id;
     }
 }
