@@ -15,17 +15,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RestController
 @AllArgsConstructor
-@Slf4j
 public class JoinController {
 
     private JoinService joinService;
-    private MemberRepository memberRepository;
 
     @PostMapping("/join")
     public ResponseEntity<String> join(@RequestBody MemberDao m, RedirectAttributes attributes) throws IllegalStateException {
         // Check if the data is appropriate (e.g., no duplicates)
         Member result = joinService.join(m);
-        log.info(result.toString());
         if (result != null) {
             // If the data is appropriate and the join is successful, return a success message
             return ResponseEntity.status(HttpStatus.OK).body("Welcome!");
@@ -44,11 +41,5 @@ public class JoinController {
         Member result = joinService.login(m);
         if(result != null) return ResponseEntity.status(HttpStatus.OK).body(result);
         else return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-    }
-
-    @PostMapping("/login-success")
-    public String loginSuccess(@RequestBody MemberDao m){
-        System.out.println("/"+m.getId()+"/articles");
-        return "/"+m.getId()+"/articles";
     }
 }
