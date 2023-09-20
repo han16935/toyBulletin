@@ -30,5 +30,6 @@ public class Member {
         this.nickName = nickName;
         this.memberId = memberId;
         this.pw = pw;
+        this.isValid = false;
     }
 }
