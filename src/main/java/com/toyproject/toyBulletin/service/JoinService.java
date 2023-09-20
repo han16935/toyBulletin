@@ -36,6 +36,10 @@ public class JoinService {
         if(original == null || !(willBeLogined.getPw().equals(original.getPw()) &&
                                  willBeLogined.getMemberId().equals(original.getMemberId())))
             return null;
-        else return original;
+        else{
+            memberRepository.login(original.getId());
+            memberRepository.save(original);
+            return original;
+        }
     }
 }
