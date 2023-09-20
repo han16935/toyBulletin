@@ -29,7 +29,7 @@
     </tr>
     </tbody>
 </table>
-<a href="/article/articleForm">New Article</a>
+<a th:href="@{/article/create(id=${param.id})}" class="btn btn-primary">New Article</a>
 <div th:replace = "~{layouts/footer}"></div>
 </body>
 </html>
