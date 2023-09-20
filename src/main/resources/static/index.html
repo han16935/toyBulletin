@@ -57,16 +57,8 @@
           });
 
           if(200<=response.status && response.status<300){
-              const result = await response.json();
               alert('Login Success!');
-              const successResponse = await fetch("/login-success", {
-                  method : "post",
-                  body : JSON.stringify(result),
-                  headers : {
-                      "Content-type" : "application/json"
-                  }
-              });
-              console.log(successResponse.body);
+              window.location.href = `/${result.id}/articles`;
           }
 
           else{
