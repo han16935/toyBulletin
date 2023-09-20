@@ -2,6 +2,7 @@ package com.toyproject.toyBulletin.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @AllArgsConstructor
@@ -21,6 +22,9 @@ public class Member {
 
     @Column(nullable = false)
     private String pw;
+
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    private Boolean isValid;
 
     public Member(String nickName, String memberId, String pw){
         this.nickName = nickName;
