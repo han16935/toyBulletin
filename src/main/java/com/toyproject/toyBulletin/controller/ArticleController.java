@@ -1,5 +1,6 @@
 package com.toyproject.toyBulletin.controller;
 
+import com.toyproject.toyBulletin.service.ArticleService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
