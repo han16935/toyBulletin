@@ -1,16 +1,17 @@
 package com.toyproject.toyBulletin.controller;
 
+import com.toyproject.toyBulletin.dao.ArticleDto;
 import com.toyproject.toyBulletin.service.ArticleService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
+@Slf4j
 public class ArticleController {
 
     private ArticleService articleService;
@@ -25,5 +26,16 @@ public class ArticleController {
         model.addAttribute("id", id);
         model.addAttribute("articles", articleService.getAllArticles());
         return "/article/articles";
+    }
+
+    @GetMapping("/article/create")
+    public String goToCreateArticle(@RequestParam Long id, Model model){
+        model.addAttribute("id", id);
+        return "/article/createArticle";
+    }
+    @PostMapping("/article/create")
+    public String createArticle(@RequestParam Long id, ArticleDto articleDto){
+        log.info(articleDto.toString());
+        return "redirect:/articles?id=" + id;
     }
 }
