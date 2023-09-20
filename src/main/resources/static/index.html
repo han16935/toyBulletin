@@ -61,7 +61,7 @@
           if(200<=response.status && response.status<300){
               const result = await response.json();
               alert('Login Success!');
-              window.location.href = `/${result.id}/articles`;
+              window.location.href = `/articles?id=${result.id}`;
           }
 
           else{
