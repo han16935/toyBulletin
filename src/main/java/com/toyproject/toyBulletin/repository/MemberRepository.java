@@ -13,8 +13,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Query(value = "SELECT * FROM MEMBER WHERE NICK_NAME = :nickName", nativeQuery = true)
     Member findByMemberNickName(@Param("nickName") String nickName);
-//    public boolean login(String memberId, String pw){
-//        if(findByMemberId(memberId).equals(pw)) return true;
-//        else return false;
-//    }
+
 }
