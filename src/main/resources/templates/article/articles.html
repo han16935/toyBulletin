@@ -16,6 +16,7 @@
         <th scope="col">ID</th>
         <th scope="col">Title</th>
         <th scope="col">Content</th>
+        <th scope="col">Actions</th>
     </tr>
     </thead>
 
@@ -26,6 +27,10 @@
 <!--            <a th:href="@{article/{id}(id=${article.getId()})}" th:text = "${article.getTitle()}"></a>-->
         </td>
         <td th:text = "${article.getContent()}">Otto</td>
+        <td>
+            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+        </td>
     </tr>
     </tbody>
 </table>
