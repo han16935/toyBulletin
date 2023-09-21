@@ -1,6 +1,6 @@
 package com.toyproject.toyBulletin.service;
 
-import com.toyproject.toyBulletin.dao.MemberDao;
+import com.toyproject.toyBulletin.dto.MemberDto;
 import com.toyproject.toyBulletin.entity.Member;
 import com.toyproject.toyBulletin.repository.MemberRepository;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     private MemberRepository memberRepository;
-    public Member join(MemberDao m) throws IllegalStateException{
+    public Member join(MemberDto m) throws IllegalStateException{
         // 1. MemberDao를 Member로 전환
         Member willBeSaved = m.toMember();
         // 1-1. 전환된 m 대해 nickName, memberId 중복 검사
@@ -26,7 +26,7 @@ public class MemberService {
         return result;
     }
 
-    public Member login(MemberDao m){
+    public Member login(MemberDto m){
         Member willBeLogined = m.toMember();
         Member original = memberRepository.findByMemberId(willBeLogined.getMemberId());
         log.info(willBeLogined.toString());

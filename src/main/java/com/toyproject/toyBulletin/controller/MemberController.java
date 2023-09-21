@@ -1,6 +1,6 @@
 package com.toyproject.toyBulletin.controller;
 
-import com.toyproject.toyBulletin.dao.MemberDao;
+import com.toyproject.toyBulletin.dto.MemberDto;
 import com.toyproject.toyBulletin.entity.Member;
 import com.toyproject.toyBulletin.service.MemberService;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 @AllArgsConstructor
@@ -20,7 +20,7 @@ public class MemberController {
     private MemberService memberService;
 
     @PostMapping("/join")
-    public ResponseEntity<String> join(@RequestBody MemberDao m, RedirectAttributes attributes) throws IllegalStateException {
+    public ResponseEntity<String> join(@RequestBody MemberDto m, RedirectAttributes attributes) throws IllegalStateException {
         // Check if the data is appropriate (e.g., no duplicates)
         Member result = memberService.join(m);
         if (result != null) {
@@ -33,7 +33,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Member> login(@RequestBody MemberDao m){
+    public ResponseEntity<Member> login(@RequestBody MemberDto m){
         /*
             1. JoinService의 login(MemberDao m) 호출 (m의 id, pw 매칭될 경우 true 반환)
             2. service의 login() 결과에 따라 ResponseEntity, body true or false return
@@ -44,7 +44,7 @@ public class MemberController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Member> logout(@RequestBody Map<String, Long> data){
+    public ResponseEntity<Member> logout(@RequestBody HashMap<String, Long> data){
         Long id = data.get("id");
         Member result = memberService.logout(id);
         return ResponseEntity.status(HttpStatus.OK).body(result);

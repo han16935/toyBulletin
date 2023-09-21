@@ -36,12 +36,14 @@
                 <li class="nav-item">
                     <button class="log-out nav-link" aria-label="Log out">Log Out</button>
                 </li>
+
                 <li class="nav-item">
                     <button class="log-out nav-link" aria-label="회원탈퇴">회원탈퇴</button>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form action = "/article/search" method = "post" class="d-flex" role="search">
+                <input type="hidden" name = "id" th:value = "${param.id}">
+                <input class="form-control me-2" name = "searchWord" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>

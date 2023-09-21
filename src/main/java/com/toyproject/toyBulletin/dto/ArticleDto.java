@@ -1,9 +1,6 @@
-package com.toyproject.toyBulletin.dao;
+package com.toyproject.toyBulletin.dto;
 
-import com.toyproject.toyBulletin.entity.Article;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter

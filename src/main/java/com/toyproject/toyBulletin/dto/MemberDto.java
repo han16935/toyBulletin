@@ -1,4 +1,4 @@
-package com.toyproject.toyBulletin.dao;
+package com.toyproject.toyBulletin.dto;
 
 import com.toyproject.toyBulletin.entity.Member;
 import lombok.Getter;
@@ -8,19 +8,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @ToString
-public class MemberDao {
+public class MemberDto {
     private Long id;
     private String nickName;
     private String memberId;
     private String pw;
 
-    public MemberDao(String nickName, String memberId, String pw){
+    public MemberDto(String nickName, String memberId, String pw){
         this.nickName = nickName;
         this.memberId = memberId;
         this.pw = pw;
     }
 
-    public MemberDao(String memberId, String pw){
+    public MemberDto(String memberId, String pw){
         this.memberId = memberId;
         this.pw = pw;
     }
@@ -28,8 +28,8 @@ public class MemberDao {
         return new Member(this.getNickName(), this.getMemberId(), this.getPw());
     }
 
-    public static MemberDao toMemberDao(Member m){
-        return new MemberDao(m.getNickName(), m.getMemberId(), m.getPw());
+    public static MemberDto toMemberDao(Member m){
+        return new MemberDto(m.getNickName(), m.getMemberId(), m.getPw());
     }
 }
 

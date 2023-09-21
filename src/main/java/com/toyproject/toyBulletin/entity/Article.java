@@ -1,6 +1,5 @@
 package com.toyproject.toyBulletin.entity;
 
-import com.toyproject.toyBulletin.dao.ArticleDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

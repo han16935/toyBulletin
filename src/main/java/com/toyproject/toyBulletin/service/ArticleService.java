@@ -1,6 +1,6 @@
 package com.toyproject.toyBulletin.service;
 
-import com.toyproject.toyBulletin.dao.ArticleDto;
+import com.toyproject.toyBulletin.dto.ArticleDto;
 import com.toyproject.toyBulletin.entity.Article;
 import com.toyproject.toyBulletin.repository.ArticleRepository;
 import com.toyproject.toyBulletin.repository.MemberRepository;
@@ -69,5 +69,9 @@ public class ArticleService {
         articleRepository.delete(articleRepository.findById(article_id).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시물은 존재하지 않습니다!")
         ));
+    }
+
+    public List<Article> getSearchResult(String searchWord) {
+        return articleRepository.getSearchResult(searchWord);
     }
 }

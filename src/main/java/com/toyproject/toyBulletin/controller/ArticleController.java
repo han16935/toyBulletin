@@ -1,6 +1,7 @@
 package com.toyproject.toyBulletin.controller;
 
-import com.toyproject.toyBulletin.dao.ArticleDto;
+import com.toyproject.toyBulletin.dto.ArticleDto;
+import com.toyproject.toyBulletin.entity.Article;
 import com.toyproject.toyBulletin.service.ArticleService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -80,4 +83,12 @@ public class ArticleController {
         return "redirect:/articles?id="+id;
     }
 
+    @PostMapping("/article/search")
+    public String getSearchedArticles(Long id, String searchWord, Model model){
+        List<Article> searchResult = articleService.getSearchResult(searchWord);
+        model.addAttribute("id", id);
+        model.addAttribute("articles", searchResult);
+        //return "/articles?id=" + id;
+        return "/article/articles";
+    }
 }
