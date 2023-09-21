@@ -39,4 +39,29 @@ public class ArticleController {
         articleService.save(articleDto);
         return "redirect:/articles?id=" + id;
     }
+
+    @GetMapping("/article/update")
+    public String isValidUpdate(@RequestParam Long id,
+                                @RequestParam Long article_id,
+                                Model model,
+                                HttpServletResponse response){
+
+        if(!articleService.isValidUpdateDelete(id, article_id)){
+            response.setHeader("Location", "http://localhost:8080");
+            response.setStatus(401); // HTTP 401 Found
+            return null; // No need to return a template name
+        }
+        model.addAttribute("id", id);
+        model.addAttribute("article", articleService.getArticle(article_id));
+        return "/article/updateArticle";
+    }
+
+    @PostMapping("/article/update")
+    public String updateArticle(@RequestParam Long id,
+                                @RequestParam Long article_id,
+                                ArticleDto articleDto){
+        log.info(articleDto.toString());
+        articleService.update(articleDto, article_id);
+        return "redirect:/articles?id=" + id;
+    }
 }
