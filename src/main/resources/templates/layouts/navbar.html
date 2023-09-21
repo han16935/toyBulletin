@@ -34,7 +34,10 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                    <button class="log-out nav-link" aria-label="Log out">Log Out</button>
+                </li>
+                <li class="nav-item">
+                    <button class="log-out nav-link" aria-label="회원탈퇴">회원탈퇴</button>
                 </li>
             </ul>
             <form class="d-flex" role="search">
@@ -44,5 +47,33 @@
         </div>
     </div>
 </nav>
+
+<script>
+    const logoutBtn = document.querySelector(".log-out");
+    logoutBtn.addEventListener("click", async () =>{
+           const params = new URLSearchParams(window.location.search);
+           const logoutData = {
+               id : params.get("id")
+           }
+
+           const response = await fetch("/logout", {
+               method : "post",
+               body : JSON.stringify(logoutData),
+               headers : {
+                   "Content-type" : "application/json"
+               }
+           });
+
+           if(200<=response.status && response.status < 300){
+               alert('Logout Success!');
+               window.location.href = "http://localhost:8080";
+           }
+
+           else alert('Logout Fail!');
+        }
+    );
+
+
+</script>
 </body>
 </html>

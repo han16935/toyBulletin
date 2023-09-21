@@ -7,12 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @AllArgsConstructor
 @Slf4j
-public class JoinService {
+public class MemberService {
 
     private MemberRepository memberRepository;
     public Member join(MemberDao m) throws IllegalStateException{
@@ -41,5 +39,17 @@ public class JoinService {
             memberRepository.save(original);
             return original;
         }
+    }
+
+    public Member logout(Long id) {
+        Member willBeLogouted = memberRepository.findById(id).orElseThrow(
+                () -> new IllegalStateException("해당 회원은 존재하지 않습니다!")
+        );
+
+        if(willBeLogouted.getIsValid() == false)
+            throw new IllegalStateException("이미 로그아웃되었습니다!");
+
+        memberRepository.logout(id);
+        return willBeLogouted;
     }
 }

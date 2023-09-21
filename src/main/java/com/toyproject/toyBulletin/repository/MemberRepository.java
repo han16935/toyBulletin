@@ -21,5 +21,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "UPDATE MEMBER SET IS_VALID = TRUE WHERE ID = :id", nativeQuery = true)
     void login(@Param("id") Long id);
 
-
+    @Transactional
+    @Modifying
+    @Query(value = "UPDATE MEMBER SET IS_VALID = FALSE WHERE ID = :id", nativeQuery = true)
+    void logout(@Param("id") Long id);
 }
