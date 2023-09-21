@@ -29,7 +29,7 @@
         <td th:text = "${article.getContent()}">Otto</td>
         <td>
             <a th:href="@{/article/update(id=${param.id}, article_id=${article.getId()})}" class="btn btn-primary">Edit</a>
-            <a href="#" class="btn btn-danger">Delete</a>
+            <a th:href="@{/article/delete(id=${param.id}, article_id=${article.getId()})}" class="btn btn-danger">Delete</a>
         </td>
     </tr>
     </tbody>

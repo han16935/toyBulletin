@@ -64,4 +64,10 @@ public class ArticleService {
                 () -> new IllegalArgumentException("해당 게시물은 존재하지 않습니다!")
         );
     }
+
+    public void delete(Long article_id) {
+        articleRepository.delete(articleRepository.findById(article_id).orElseThrow(
+                () -> new IllegalArgumentException("해당 게시물은 존재하지 않습니다!")
+        ));
+    }
 }

@@ -64,4 +64,20 @@ public class ArticleController {
         articleService.update(articleDto, article_id);
         return "redirect:/articles?id=" + id;
     }
+
+    @GetMapping("/article/delete")
+    public String deleteArticle(@RequestParam Long id,
+                                @RequestParam Long article_id,
+                                HttpServletResponse response){
+
+        if(!articleService.isValidUpdateDelete(id, article_id)){
+            response.setHeader("Location", "http://localhost:8080");
+            response.setStatus(401);
+            return null;
+        }
+
+        articleService.delete(article_id);
+        return "redirect:/articles?id="+id;
+    }
+
 }
