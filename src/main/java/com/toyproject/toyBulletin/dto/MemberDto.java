@@ -24,6 +24,12 @@ public class MemberDto {
         this.memberId = memberId;
         this.pw = pw;
     }
+
+    public MemberDto(Long id, String pw){
+        this.id = id;
+        this.pw = pw;
+    }
+
     public Member toMember(){
         return new Member(this.getNickName(), this.getMemberId(), this.getPw());
     }

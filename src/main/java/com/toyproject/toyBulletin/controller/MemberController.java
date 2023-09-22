@@ -49,4 +49,10 @@ public class MemberController {
         Member result = memberService.logout(id);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
+
+    @PostMapping("/member-out")
+    public ResponseEntity<Boolean> memberOut(@RequestBody MemberDto m){
+        log.info("id : " + m.getId() + " pw : " + m.getPw());
+        return null;
+    }
 }
