@@ -52,4 +52,19 @@ public class MemberService {
         memberRepository.logout(id);
         return willBeLogouted;
     }
+
+    public boolean memberOut(MemberDto m) {
+        Member willBeDeleted = memberRepository.findById(m.getId()).orElse(null);
+
+        if(willBeDeleted == null) return false;
+
+        if(!willBeDeleted.getIsValid()) return false;
+
+        if(!willBeDeleted.getPw().equals(m.getPw())) return false;
+
+        else{
+            memberRepository.deleteById(m.getId());
+            return true;
+        }
+    }
 }

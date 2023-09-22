@@ -53,6 +53,8 @@ public class MemberController {
     @PostMapping("/member-out")
     public ResponseEntity<Boolean> memberOut(@RequestBody MemberDto m){
         log.info("id : " + m.getId() + " pw : " + m.getPw());
-        return null;
+        Boolean message = memberService.memberOut(m);
+        if(message) return ResponseEntity.status(HttpStatus.OK).body(true);
+        else return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
