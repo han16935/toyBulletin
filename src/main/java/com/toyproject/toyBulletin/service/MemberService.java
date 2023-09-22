@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-@Slf4j
 public class MemberService {
 
     private MemberRepository memberRepository;
@@ -29,8 +28,6 @@ public class MemberService {
     public Member login(MemberDto m){
         Member willBeLogined = m.toMember();
         Member original = memberRepository.findByMemberId(willBeLogined.getMemberId());
-        log.info(willBeLogined.toString());
-        log.info(original.toString());
         if(original == null || !(willBeLogined.getPw().equals(original.getPw()) &&
                                  willBeLogined.getMemberId().equals(original.getMemberId())))
             return null;
